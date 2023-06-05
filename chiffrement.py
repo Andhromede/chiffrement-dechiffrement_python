@@ -34,18 +34,18 @@ messageAdechiffrer = "]\x8a\x89\x85\x8a\x90\x8d;\x88\x80\x8e;\x8f\x8dă\x8e;~\x8
 def calculFrequence(messageAdechiffrer):
     # primaryKey = dechiffrement(messageAdechiffrer, 27)
 
-
-
-    tab = []
+    tab = {}
 
     for char in messageAdechiffrer:
         if char in tab:
-            
+            tab[char] += 1
         else :
-            tab.append(char)
+            tab[char] = 1
        
-    
-    print(tab)
+    lettreCourante = max(tab, key=tab.get)
+    asciiLettreCourante = ord(lettreCourante)
+
+    print(lettreCourante)
     # return primaryKey
 
 print(calculFrequence(messageAdechiffrer))
