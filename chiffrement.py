@@ -42,10 +42,14 @@ def calculFrequence(messageAdechiffrer):
         else :
             tab[char] = 1
        
-    lettreCourante = max(tab, key=tab.get)
-    asciiLettreCourante = ord(lettreCourante)
 
+    lettreCourante = max(tab, key=tab.get)
     print(lettreCourante)
+
+    asciiLettreCourante = ord(lettreCourante)
+    ecart = - (ord(" ") - asciiLettreCourante)
+    print(ecart)
+
     # return primaryKey
 
 print(calculFrequence(messageAdechiffrer))
