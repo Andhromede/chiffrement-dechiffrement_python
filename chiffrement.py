@@ -10,6 +10,9 @@ def chiffrement(message, nbr):
     for i in range(len(message)):
         msgChiffree += chr(ord(message[i])+nbr)
 
+    # for i in message:
+    #     msgChiffree += chr(ord(i)+nbr)
+
     return msgChiffree
 
 # strChiffree = chiffrement("hello world !", 3)
@@ -45,14 +48,50 @@ def calculFrequence(messageAdechiffrer):
     asciiLettreCourante = ord(lettreCourante)
     # Calcul l'écart (en ascii) entre le caractère courant et la barre espace
     ecart = - (ord(" ") - asciiLettreCourante)
+    # ecart = ord(asciiLettreCourante - (" "))
 
     return dechiffrement(messageAdechiffrer, ecart)
 
-print(calculFrequence(messageAdechiffrer))
+# print(calculFrequence(messageAdechiffrer))
         
 
 #=========================================================
 # VIGENERE
 # =========================================================
+
+msgVigenere = """Frères humains qui après nous vivez
+N'ayez les cœurs contre nous endurcis,
+Car, se pitié de nous pauvres avez,
+Dieu en aura plus tot de vous mercis.
+Vous nous voyez cy attachez cinq, six
+Quant de la chair, que trop avons nourrie,
+Elle est pieça devoree et pourrie,
+Et nous les os, devenons cendre et pouldre.
+De nostre mal personne ne s'en rie :
+Mais priez Dieu que tous nous vueille absouldre!"""
+
+cle = [1, 2, 3, 4]
+
+
+# ----------- CHIFFREMENT -----------
+def chiffrer_vigenere(message:str, cle:tuple) -> str :
+    message_code = ""
+    index_cle = 0
+    for lettre in message:
+        message_code += chr(ord(lettre) + cle[index_cle])
+        index_cle = (index_cle + 1) % len(cle)
+    return message_code
+
+# message_code_vigenere = chiffrer_vigenere(msgVigenere, cle)
+# print(message_code_vigenere)
+
+
+# ----------- DECHIFFREMENT -----------
+def dechiffrer_vigenere(message_code:str, cle:str) -> str :
+    # chiffrer_vigenere(message_code,[-elt for elt in cle])
+    return chiffrer_vigenere(message_code, tuple([-elt for elt in cle]))
+
+# message_decode_vigenere = dechiffrer_vigenere(message_code_vigenere, cle)
+# print(message_decode_vigenere)    
 
 
