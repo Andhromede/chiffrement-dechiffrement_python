@@ -1,13 +1,21 @@
 from math import *
 from itertools import permutations
+import random
+
 
 # ============================================================
-dico = {
-    0:[0, 0],
-    1:[300.8, 202.54],
-    2:[5432.6, 676.865],
-    3:[65.9, 49.643],
-}
+# dico = {
+#     0:[0, 0],
+#     1:[300.8, 202.54],
+#     2:[5432.6, 676.865],
+#     3:[65.9, 49.643],
+# }
+
+dico = {}
+
+for i in range(5):
+    dico[i] = (round(random.uniform(00.00, 500.99), 2)), (round(random.uniform(00.00, 500.99), 2))
+
 
 # ============================================================
 # CALCUL TTES LES POSSIBILITES D'UNE CHAINE ET LES RENVOIS
