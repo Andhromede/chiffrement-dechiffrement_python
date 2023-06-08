@@ -33,17 +33,20 @@ class Algo :
                 x2 =  self.points_a_visiter[point][1]
 
 
-                # # print(point)
+                # print(point)
                 # print(len(self.points_a_visiter))
-                # if point < len(self.points_a_visiter) :
-                #     y1 = self.points_a_visiter[point][0]+ 1
-                #     y2 = self.points_a_visiter[point][1]+ 1
 
+                if point <= len(self.points_a_visiter) :
+                    y1 = self.points_a_visiter[point][0]+ 1
+                    y2 = self.points_a_visiter[point][1]+ 1
+                else :
+                    y1 = self.points_a_visiter[point][0]
+                    y2 = self.points_a_visiter[point][1]
                 
                 distance = sqrt((x2-x1)**2 + (y2-y1)**2)
                 self.population[point]["longueur"] = distance
 
-        # print (self.population)
+        print (self.population)
 
                 
 
