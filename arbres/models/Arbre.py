@@ -52,7 +52,11 @@ def creation_noeud(noeud):
         noeud.add_child(i)
     return noeud
 
-test = creation_noeud(racine)
+
+
+
+
+
 print(racine.children)
 
 # print(noeud1.children)
