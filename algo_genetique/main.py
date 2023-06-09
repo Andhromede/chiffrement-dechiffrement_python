@@ -1,9 +1,16 @@
-import random
+import random, operator
 from math import *
 
 
+
 class Algo :
-    
+
+# -----------------------------------------------------------
+# 1°) CREER LA POPULATION DE BASE
+# ----------------------------------------------------------- 
+    """
+    Initialisation de la classe : tableau de points avec les coordonnées + la taille de la population
+    """
     def __init__(self, points_a_visiter, taille_population):
         self.points_a_visiter = points_a_visiter
         self.taille_population = taille_population
@@ -13,7 +20,7 @@ class Algo :
             index_point = [ i for i in range(1, len(points_a_visiter))]
             random.shuffle(index_point)
             index_point.insert(0, 0)
-            
+
             dico = {
                 "chemin": index_point,
                 "longueur": None,
@@ -21,38 +28,34 @@ class Algo :
 
             self.population.append(dico)
 
-
-    def calcul_longueur(self):
-        result = 0
+# -----------------------------------------------------------
+# 2°) CALCUL LA LONGUEUR TOTAL DE TOUS LES TRAJETS
+# -----------------------------------------------------------
+    def evaluation_population(self):
+        distance = 0
 
         for item in self.population :
-            # print(f"item = {item}")
+            for i in range(1, len(item['chemin'])):
+                x1 =  self.points_a_visiter[i][0]
+                y1 =  self.points_a_visiter[i][1]
+                x2 = self.points_a_visiter[i-1][0]
+                y2 = self.points_a_visiter[i-1][1]
+                distance += sqrt((x2-x1)**2 + (y2-y1)**2)
+                item["longueur"] = distance
 
-            for point in item['chemin']:
-                x1 =  self.points_a_visiter[point][0]
-                x2 =  self.points_a_visiter[point][1]
+        return self.population
 
+# -----------------------------------------------------------
+# 3°) SELECTION DES MEILLEURS (1/3) CHEMINS
+# -----------------------------------------------------------
+    def selection_naturel(self):
+        self.population = sorted(self.population, key= operator.itemgetter("longueur"))
+        self.population = self.population[::len(self.population)//3]
+        print(self.population)
 
-                # print(point)
-                # print(len(self.points_a_visiter))
-
-                if point <= len(self.points_a_visiter) :
-                    y1 = self.points_a_visiter[point][0]+ 1
-                    y2 = self.points_a_visiter[point][1]+ 1
-                else :
-                    y1 = self.points_a_visiter[point][0]
-                    y2 = self.points_a_visiter[point][1]
-                
-                distance = sqrt((x2-x1)**2 + (y2-y1)**2)
-                self.population[point]["longueur"] = distance
-
-        print (self.population)
-
-                
-
-    
-
-
+# -----------------------------------------------------------
+# 4°) CROISEMENTS / MUTATIONS
+# -----------------------------------------------------------
 
 
 
@@ -61,7 +64,6 @@ class Algo :
 # -----------------------------------------------------------
 # TEST
 # -----------------------------------------------------------
-
 dico = {
     0:[0, 0],
     1:[300.8, 202.54],
@@ -70,5 +72,14 @@ dico = {
     4:[65.9, 49.643],
 }
 
-test = Algo(dico, len(dico))
-print (test.calcul_longueur())
+dico2 = {
+    1:[564.3, 563.75],
+    2:[178.3, 458.926],
+    3:[65.2, 24.153],
+    4:[65.8, 92.465],
+}
+
+algo1 = Algo(dico, len(dico))
+print(algo1.population)
+print (algo1.evaluation_population())
+print(algo1.selection_naturel())
