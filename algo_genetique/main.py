@@ -78,7 +78,7 @@ class Algo :
     #         print (melange)
 
     def mutation(self) -> None :
-        for i in range(3, len(self.population)) :
+        for i in range(3, len(self.population)):
             if random.randint(1, 100) <= 5:
                 chemin = self.population[i]
                 nb_aleatoire = random.randint(1, len(chemin["chemin"])-1)
